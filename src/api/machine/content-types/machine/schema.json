@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "machines",
+  "info": {
+    "singularName": "machine",
+    "pluralName": "machines",
+    "displayName": "Machine",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "taken": {
+      "type": "boolean",
+      "default": false
+    },
+    "photo": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
+    },
+    "workout": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::workout.workout",
+      "inversedBy": "machines"
+    }
+  }
+}
