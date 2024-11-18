@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "supersets",
+  "info": {
+    "singularName": "superset",
+    "pluralName": "supersets",
+    "displayName": "Superset"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    }
+  }
+}

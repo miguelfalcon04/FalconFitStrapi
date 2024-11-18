@@ -402,6 +402,36 @@ export interface ApiMachineMachine extends Schema.CollectionType {
   };
 }
 
+export interface ApiSupersetSuperset extends Schema.CollectionType {
+  collectionName: 'supersets';
+  info: {
+    singularName: 'superset';
+    pluralName: 'supersets';
+    displayName: 'Superset';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::superset.superset',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::superset.superset',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiWorkoutWorkout extends Schema.CollectionType {
   collectionName: 'workouts';
   info: {
@@ -775,6 +805,7 @@ declare module '@strapi/types' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'api::machine.machine': ApiMachineMachine;
+      'api::superset.superset': ApiSupersetSuperset;
       'api::workout.workout': ApiWorkoutWorkout;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
