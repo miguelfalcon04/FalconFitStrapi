@@ -65,11 +65,11 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "workouts": {
+    "userff": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::workout.workout",
-      "mappedBy": "user"
+      "relation": "oneToOne",
+      "target": "api::userff.userff",
+      "mappedBy": "users_permissions_user"
     }
   }
 }

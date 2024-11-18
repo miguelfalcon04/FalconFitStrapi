@@ -379,10 +379,15 @@ export interface ApiMachineMachine extends Schema.CollectionType {
     description: Attribute.String;
     taken: Attribute.Boolean & Attribute.DefaultTo<false>;
     photo: Attribute.Media;
-    workout: Attribute.Relation<
+    workouts: Attribute.Relation<
       'api::machine.machine',
-      'manyToOne',
+      'manyToMany',
       'api::workout.workout'
+    >;
+    supersets: Attribute.Relation<
+      'api::machine.machine',
+      'manyToMany',
+      'api::superset.superset'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -408,12 +413,28 @@ export interface ApiSupersetSuperset extends Schema.CollectionType {
     singularName: 'superset';
     pluralName: 'supersets';
     displayName: 'Superset';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    name: Attribute.String;
+    title: Attribute.String;
+    machines: Attribute.Relation<
+      'api::superset.superset',
+      'manyToMany',
+      'api::machine.machine'
+    >;
+    workouts: Attribute.Relation<
+      'api::superset.superset',
+      'manyToMany',
+      'api::workout.workout'
+    >;
+    userff: Attribute.Relation<
+      'api::superset.superset',
+      'manyToOne',
+      'api::userff.userff'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -425,6 +446,52 @@ export interface ApiSupersetSuperset extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::superset.superset',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiUserffUserff extends Schema.CollectionType {
+  collectionName: 'userffs';
+  info: {
+    singularName: 'userff';
+    pluralName: 'userffs';
+    displayName: 'Userff';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    username: Attribute.String;
+    email: Attribute.Email;
+    users_permissions_user: Attribute.Relation<
+      'api::userff.userff',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    workouts: Attribute.Relation<
+      'api::userff.userff',
+      'oneToMany',
+      'api::workout.workout'
+    >;
+    supersets: Attribute.Relation<
+      'api::userff.userff',
+      'oneToMany',
+      'api::superset.superset'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::userff.userff',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::userff.userff',
       'oneToOne',
       'admin::user'
     > &
@@ -447,15 +514,20 @@ export interface ApiWorkoutWorkout extends Schema.CollectionType {
     title: Attribute.String;
     subtitle: Attribute.String;
     photo: Attribute.Media;
-    machines: Attribute.Relation<
+    supersets: Attribute.Relation<
       'api::workout.workout',
-      'oneToMany',
-      'api::machine.machine'
+      'manyToMany',
+      'api::superset.superset'
     >;
-    user: Attribute.Relation<
+    userff: Attribute.Relation<
       'api::workout.workout',
       'manyToOne',
-      'plugin::users-permissions.user'
+      'api::userff.userff'
+    >;
+    machines: Attribute.Relation<
+      'api::workout.workout',
+      'manyToMany',
+      'api::machine.machine'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -772,10 +844,10 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    workouts: Attribute.Relation<
+    userff: Attribute.Relation<
       'plugin::users-permissions.user',
-      'oneToMany',
-      'api::workout.workout'
+      'oneToOne',
+      'api::userff.userff'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -806,6 +878,7 @@ declare module '@strapi/types' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'api::machine.machine': ApiMachineMachine;
       'api::superset.superset': ApiSupersetSuperset;
+      'api::userff.userff': ApiUserffUserff;
       'api::workout.workout': ApiWorkoutWorkout;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;

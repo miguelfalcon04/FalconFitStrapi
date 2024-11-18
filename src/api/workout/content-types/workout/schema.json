@@ -29,17 +29,23 @@
         "audios"
       ]
     },
-    "machines": {
+    "supersets": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::machine.machine",
-      "mappedBy": "workout"
+      "relation": "manyToMany",
+      "target": "api::superset.superset",
+      "mappedBy": "workouts"
     },
-    "user": {
+    "userff": {
       "type": "relation",
       "relation": "manyToOne",
-      "target": "plugin::users-permissions.user",
+      "target": "api::userff.userff",
       "inversedBy": "workouts"
+    },
+    "machines": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::machine.machine",
+      "mappedBy": "workouts"
     }
   }
 }
