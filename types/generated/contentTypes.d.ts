@@ -362,191 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiMachineMachine extends Schema.CollectionType {
-  collectionName: 'machines';
-  info: {
-    singularName: 'machine';
-    pluralName: 'machines';
-    displayName: 'Machine';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String;
-    subtitle: Attribute.String;
-    description: Attribute.String;
-    taken: Attribute.Boolean & Attribute.DefaultTo<false>;
-    photo: Attribute.Media;
-    workouts: Attribute.Relation<
-      'api::machine.machine',
-      'manyToMany',
-      'api::workout.workout'
-    >;
-    supersets: Attribute.Relation<
-      'api::machine.machine',
-      'manyToMany',
-      'api::superset.superset'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::machine.machine',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::machine.machine',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiSupersetSuperset extends Schema.CollectionType {
-  collectionName: 'supersets';
-  info: {
-    singularName: 'superset';
-    pluralName: 'supersets';
-    displayName: 'Superset';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String;
-    machines: Attribute.Relation<
-      'api::superset.superset',
-      'manyToMany',
-      'api::machine.machine'
-    >;
-    workouts: Attribute.Relation<
-      'api::superset.superset',
-      'manyToMany',
-      'api::workout.workout'
-    >;
-    userff: Attribute.Relation<
-      'api::superset.superset',
-      'manyToOne',
-      'api::userff.userff'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::superset.superset',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::superset.superset',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiUserffUserff extends Schema.CollectionType {
-  collectionName: 'userffs';
-  info: {
-    singularName: 'userff';
-    pluralName: 'userffs';
-    displayName: 'Userff';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    username: Attribute.String;
-    email: Attribute.Email;
-    users_permissions_user: Attribute.Relation<
-      'api::userff.userff',
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
-    workouts: Attribute.Relation<
-      'api::userff.userff',
-      'oneToMany',
-      'api::workout.workout'
-    >;
-    supersets: Attribute.Relation<
-      'api::userff.userff',
-      'oneToMany',
-      'api::superset.superset'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::userff.userff',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::userff.userff',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiWorkoutWorkout extends Schema.CollectionType {
-  collectionName: 'workouts';
-  info: {
-    singularName: 'workout';
-    pluralName: 'workouts';
-    displayName: 'Workout';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String;
-    subtitle: Attribute.String;
-    photo: Attribute.Media;
-    supersets: Attribute.Relation<
-      'api::workout.workout',
-      'manyToMany',
-      'api::superset.superset'
-    >;
-    userff: Attribute.Relation<
-      'api::workout.workout',
-      'manyToOne',
-      'api::userff.userff'
-    >;
-    machines: Attribute.Relation<
-      'api::workout.workout',
-      'manyToMany',
-      'api::machine.machine'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::workout.workout',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::workout.workout',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -866,6 +681,191 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiMachineMachine extends Schema.CollectionType {
+  collectionName: 'machines';
+  info: {
+    singularName: 'machine';
+    pluralName: 'machines';
+    displayName: 'Machine';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    subtitle: Attribute.String;
+    description: Attribute.String;
+    taken: Attribute.Boolean & Attribute.DefaultTo<false>;
+    photo: Attribute.Media;
+    workouts: Attribute.Relation<
+      'api::machine.machine',
+      'manyToMany',
+      'api::workout.workout'
+    >;
+    supersets: Attribute.Relation<
+      'api::machine.machine',
+      'manyToMany',
+      'api::superset.superset'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::machine.machine',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::machine.machine',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSupersetSuperset extends Schema.CollectionType {
+  collectionName: 'supersets';
+  info: {
+    singularName: 'superset';
+    pluralName: 'supersets';
+    displayName: 'Superset';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    machines: Attribute.Relation<
+      'api::superset.superset',
+      'manyToMany',
+      'api::machine.machine'
+    >;
+    workouts: Attribute.Relation<
+      'api::superset.superset',
+      'manyToMany',
+      'api::workout.workout'
+    >;
+    userff: Attribute.Relation<
+      'api::superset.superset',
+      'manyToOne',
+      'api::userff.userff'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::superset.superset',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::superset.superset',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiUserffUserff extends Schema.CollectionType {
+  collectionName: 'userffs';
+  info: {
+    singularName: 'userff';
+    pluralName: 'userffs';
+    displayName: 'Userff';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    username: Attribute.String;
+    email: Attribute.Email;
+    users_permissions_user: Attribute.Relation<
+      'api::userff.userff',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    workouts: Attribute.Relation<
+      'api::userff.userff',
+      'oneToMany',
+      'api::workout.workout'
+    >;
+    supersets: Attribute.Relation<
+      'api::userff.userff',
+      'oneToMany',
+      'api::superset.superset'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::userff.userff',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::userff.userff',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiWorkoutWorkout extends Schema.CollectionType {
+  collectionName: 'workouts';
+  info: {
+    singularName: 'workout';
+    pluralName: 'workouts';
+    displayName: 'Workout';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    subtitle: Attribute.String;
+    photo: Attribute.Media;
+    supersets: Attribute.Relation<
+      'api::workout.workout',
+      'manyToMany',
+      'api::superset.superset'
+    >;
+    userff: Attribute.Relation<
+      'api::workout.workout',
+      'manyToOne',
+      'api::userff.userff'
+    >;
+    machines: Attribute.Relation<
+      'api::workout.workout',
+      'manyToMany',
+      'api::machine.machine'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::workout.workout',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::workout.workout',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -876,16 +876,16 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::machine.machine': ApiMachineMachine;
-      'api::superset.superset': ApiSupersetSuperset;
-      'api::userff.userff': ApiUserffUserff;
-      'api::workout.workout': ApiWorkoutWorkout;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::i18n.locale': PluginI18NLocale;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::machine.machine': ApiMachineMachine;
+      'api::superset.superset': ApiSupersetSuperset;
+      'api::userff.userff': ApiUserffUserff;
+      'api::workout.workout': ApiWorkoutWorkout;
     }
   }
 }
