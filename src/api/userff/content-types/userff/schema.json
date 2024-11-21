@@ -34,6 +34,12 @@
       "relation": "oneToMany",
       "target": "api::superset.superset",
       "mappedBy": "userff"
+    },
+    "exercise": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::exercise.exercise",
+      "mappedBy": "userff"
     }
   }
 }

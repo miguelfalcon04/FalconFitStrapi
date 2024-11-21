@@ -681,6 +681,53 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiExerciseExercise extends Schema.CollectionType {
+  collectionName: 'exercises';
+  info: {
+    singularName: 'exercise';
+    pluralName: 'exercises';
+    displayName: 'Exercise';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    subtitle: Attribute.String;
+    photo: Attribute.Media;
+    machine: Attribute.Relation<
+      'api::exercise.exercise',
+      'manyToOne',
+      'api::machine.machine'
+    >;
+    supersets: Attribute.Relation<
+      'api::exercise.exercise',
+      'manyToMany',
+      'api::superset.superset'
+    >;
+    userff: Attribute.Relation<
+      'api::exercise.exercise',
+      'oneToOne',
+      'api::userff.userff'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::exercise.exercise',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::exercise.exercise',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiMachineMachine extends Schema.CollectionType {
   collectionName: 'machines';
   info: {
@@ -707,6 +754,11 @@ export interface ApiMachineMachine extends Schema.CollectionType {
       'api::machine.machine',
       'manyToMany',
       'api::superset.superset'
+    >;
+    exercises: Attribute.Relation<
+      'api::machine.machine',
+      'oneToMany',
+      'api::exercise.exercise'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -754,6 +806,11 @@ export interface ApiSupersetSuperset extends Schema.CollectionType {
       'manyToOne',
       'api::userff.userff'
     >;
+    exercises: Attribute.Relation<
+      'api::superset.superset',
+      'manyToMany',
+      'api::exercise.exercise'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -799,6 +856,11 @@ export interface ApiUserffUserff extends Schema.CollectionType {
       'api::userff.userff',
       'oneToMany',
       'api::superset.superset'
+    >;
+    exercise: Attribute.Relation<
+      'api::userff.userff',
+      'oneToOne',
+      'api::exercise.exercise'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -882,6 +944,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::exercise.exercise': ApiExerciseExercise;
       'api::machine.machine': ApiMachineMachine;
       'api::superset.superset': ApiSupersetSuperset;
       'api::userff.userff': ApiUserffUserff;

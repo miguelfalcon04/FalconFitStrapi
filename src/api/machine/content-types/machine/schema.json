@@ -45,6 +45,12 @@
       "relation": "manyToMany",
       "target": "api::superset.superset",
       "mappedBy": "machines"
+    },
+    "exercises": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::exercise.exercise",
+      "mappedBy": "machine"
     }
   }
 }
