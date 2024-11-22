@@ -23,23 +23,17 @@
       "target": "plugin::users-permissions.user",
       "inversedBy": "userff"
     },
-    "workouts": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::workout.workout",
-      "mappedBy": "userff"
-    },
     "supersets": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::superset.superset",
       "mappedBy": "userff"
     },
-    "exercise": {
+    "exercises": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "manyToMany",
       "target": "api::exercise.exercise",
-      "mappedBy": "userff"
+      "mappedBy": "userffs"
     }
   }
 }

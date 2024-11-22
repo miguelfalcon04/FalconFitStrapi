@@ -34,18 +34,6 @@
         "videos"
       ]
     },
-    "workouts": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::workout.workout",
-      "inversedBy": "machines"
-    },
-    "supersets": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::superset.superset",
-      "mappedBy": "machines"
-    },
     "exercises": {
       "type": "relation",
       "relation": "oneToMany",

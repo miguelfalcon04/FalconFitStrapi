@@ -4,7 +4,8 @@
   "info": {
     "singularName": "exercise",
     "pluralName": "exercises",
-    "displayName": "Exercise"
+    "displayName": "Exercise",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -18,14 +19,15 @@
       "type": "string"
     },
     "photo": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
     },
     "machine": {
       "type": "relation",
@@ -39,11 +41,11 @@
       "target": "api::superset.superset",
       "inversedBy": "exercises"
     },
-    "userff": {
+    "userffs": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "manyToMany",
       "target": "api::userff.userff",
-      "inversedBy": "exercise"
+      "inversedBy": "exercises"
     }
   }
 }

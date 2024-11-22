@@ -15,18 +15,6 @@
     "title": {
       "type": "string"
     },
-    "machines": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::machine.machine",
-      "inversedBy": "supersets"
-    },
-    "workouts": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::workout.workout",
-      "inversedBy": "supersets"
-    },
     "userff": {
       "type": "relation",
       "relation": "manyToOne",

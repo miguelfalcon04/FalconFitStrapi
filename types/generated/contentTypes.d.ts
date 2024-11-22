@@ -687,6 +687,7 @@ export interface ApiExerciseExercise extends Schema.CollectionType {
     singularName: 'exercise';
     pluralName: 'exercises';
     displayName: 'Exercise';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -705,9 +706,9 @@ export interface ApiExerciseExercise extends Schema.CollectionType {
       'manyToMany',
       'api::superset.superset'
     >;
-    userff: Attribute.Relation<
+    userffs: Attribute.Relation<
       'api::exercise.exercise',
-      'oneToOne',
+      'manyToMany',
       'api::userff.userff'
     >;
     createdAt: Attribute.DateTime;
@@ -745,16 +746,6 @@ export interface ApiMachineMachine extends Schema.CollectionType {
     description: Attribute.String;
     taken: Attribute.Boolean & Attribute.DefaultTo<false>;
     photo: Attribute.Media;
-    workouts: Attribute.Relation<
-      'api::machine.machine',
-      'manyToMany',
-      'api::workout.workout'
-    >;
-    supersets: Attribute.Relation<
-      'api::machine.machine',
-      'manyToMany',
-      'api::superset.superset'
-    >;
     exercises: Attribute.Relation<
       'api::machine.machine',
       'oneToMany',
@@ -791,16 +782,6 @@ export interface ApiSupersetSuperset extends Schema.CollectionType {
   };
   attributes: {
     title: Attribute.String;
-    machines: Attribute.Relation<
-      'api::superset.superset',
-      'manyToMany',
-      'api::machine.machine'
-    >;
-    workouts: Attribute.Relation<
-      'api::superset.superset',
-      'manyToMany',
-      'api::workout.workout'
-    >;
     userff: Attribute.Relation<
       'api::superset.superset',
       'manyToOne',
@@ -847,19 +828,14 @@ export interface ApiUserffUserff extends Schema.CollectionType {
       'oneToOne',
       'plugin::users-permissions.user'
     >;
-    workouts: Attribute.Relation<
-      'api::userff.userff',
-      'oneToMany',
-      'api::workout.workout'
-    >;
     supersets: Attribute.Relation<
       'api::userff.userff',
       'oneToMany',
       'api::superset.superset'
     >;
-    exercise: Attribute.Relation<
+    exercises: Attribute.Relation<
       'api::userff.userff',
-      'oneToOne',
+      'manyToMany',
       'api::exercise.exercise'
     >;
     createdAt: Attribute.DateTime;
@@ -873,54 +849,6 @@ export interface ApiUserffUserff extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::userff.userff',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiWorkoutWorkout extends Schema.CollectionType {
-  collectionName: 'workouts';
-  info: {
-    singularName: 'workout';
-    pluralName: 'workouts';
-    displayName: 'Workout';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String;
-    subtitle: Attribute.String;
-    photo: Attribute.Media;
-    supersets: Attribute.Relation<
-      'api::workout.workout',
-      'manyToMany',
-      'api::superset.superset'
-    >;
-    userff: Attribute.Relation<
-      'api::workout.workout',
-      'manyToOne',
-      'api::userff.userff'
-    >;
-    machines: Attribute.Relation<
-      'api::workout.workout',
-      'manyToMany',
-      'api::machine.machine'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::workout.workout',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::workout.workout',
       'oneToOne',
       'admin::user'
     > &
@@ -948,7 +876,6 @@ declare module '@strapi/types' {
       'api::machine.machine': ApiMachineMachine;
       'api::superset.superset': ApiSupersetSuperset;
       'api::userff.userff': ApiUserffUserff;
-      'api::workout.workout': ApiWorkoutWorkout;
     }
   }
 }
