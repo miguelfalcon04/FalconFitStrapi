@@ -823,12 +823,6 @@ export interface ApiUserffUserff extends Schema.CollectionType {
   };
   attributes: {
     name: Attribute.String;
-    email: Attribute.Email;
-    users_permissions_user: Attribute.Relation<
-      'api::userff.userff',
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
     supersets: Attribute.Relation<
       'api::userff.userff',
       'oneToMany',
@@ -840,6 +834,11 @@ export interface ApiUserffUserff extends Schema.CollectionType {
       'api::exercise.exercise'
     >;
     surname: Attribute.String;
+    user: Attribute.Relation<
+      'api::userff.userff',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

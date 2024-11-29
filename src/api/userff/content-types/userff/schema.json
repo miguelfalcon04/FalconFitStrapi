@@ -15,15 +15,6 @@
     "name": {
       "type": "string"
     },
-    "email": {
-      "type": "email"
-    },
-    "users_permissions_user": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "userff"
-    },
     "supersets": {
       "type": "relation",
       "relation": "oneToMany",
@@ -38,6 +29,12 @@
     },
     "surname": {
       "type": "string"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "userff"
     }
   }
 }
