@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "locations",
+  "collectionName": "places",
   "info": {
-    "singularName": "location",
-    "pluralName": "locations",
-    "displayName": "Location"
+    "singularName": "place",
+    "pluralName": "places",
+    "displayName": "Place"
   },
   "options": {
     "draftAndPublish": true

@@ -729,37 +729,6 @@ export interface ApiExerciseExercise extends Schema.CollectionType {
   };
 }
 
-export interface ApiLocationLocation extends Schema.CollectionType {
-  collectionName: 'locations';
-  info: {
-    singularName: 'location';
-    pluralName: 'locations';
-    displayName: 'Location';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String;
-    description: Attribute.Text;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::location.location',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::location.location',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiMachineMachine extends Schema.CollectionType {
   collectionName: 'machines';
   info: {
@@ -793,6 +762,37 @@ export interface ApiMachineMachine extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::machine.machine',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPlacePlace extends Schema.CollectionType {
+  collectionName: 'places';
+  info: {
+    singularName: 'place';
+    pluralName: 'places';
+    displayName: 'Place';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    description: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::place.place',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::place.place',
       'oneToOne',
       'admin::user'
     > &
@@ -905,8 +905,8 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::exercise.exercise': ApiExerciseExercise;
-      'api::location.location': ApiLocationLocation;
       'api::machine.machine': ApiMachineMachine;
+      'api::place.place': ApiPlacePlace;
       'api::superset.superset': ApiSupersetSuperset;
       'api::userff.userff': ApiUserffUserff;
     }
