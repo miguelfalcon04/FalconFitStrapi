@@ -775,6 +775,7 @@ export interface ApiPlacePlace extends Schema.CollectionType {
     singularName: 'place';
     pluralName: 'places';
     displayName: 'Place';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -782,6 +783,8 @@ export interface ApiPlacePlace extends Schema.CollectionType {
   attributes: {
     title: Attribute.String;
     description: Attribute.Text;
+    latitud: Attribute.Float;
+    longitud: Attribute.Float;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

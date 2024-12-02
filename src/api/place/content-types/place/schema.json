@@ -4,7 +4,8 @@
   "info": {
     "singularName": "place",
     "pluralName": "places",
-    "displayName": "Place"
+    "displayName": "Place",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -16,6 +17,12 @@
     },
     "description": {
       "type": "text"
+    },
+    "latitud": {
+      "type": "float"
+    },
+    "longitud": {
+      "type": "float"
     }
   }
 }
