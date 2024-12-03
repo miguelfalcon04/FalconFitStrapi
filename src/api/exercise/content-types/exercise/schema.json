@@ -18,17 +18,6 @@
     "subtitle": {
       "type": "string"
     },
-    "picture": {
-      "type": "media",
-      "multiple": true,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
     "machine": {
       "type": "relation",
       "relation": "manyToOne",
@@ -46,6 +35,9 @@
       "relation": "manyToMany",
       "target": "api::userff.userff",
       "inversedBy": "exercises"
+    },
+    "description": {
+      "type": "text"
     }
   }
 }

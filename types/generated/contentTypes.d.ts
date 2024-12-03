@@ -695,7 +695,6 @@ export interface ApiExerciseExercise extends Schema.CollectionType {
   attributes: {
     title: Attribute.String;
     subtitle: Attribute.String;
-    picture: Attribute.Media;
     machine: Attribute.Relation<
       'api::exercise.exercise',
       'manyToOne',
@@ -711,6 +710,7 @@ export interface ApiExerciseExercise extends Schema.CollectionType {
       'manyToMany',
       'api::userff.userff'
     >;
+    description: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
